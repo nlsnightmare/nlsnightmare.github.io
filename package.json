@@ -1,0 +1,24 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "postcss.config.js",
+  "dependencies": {
+    "tailwindcss": "^1.9.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "build-site": "NODE_ENV=production tailwindcss build style.css -o assets/css/style.css && JEKYLL_ENV=production jekyll build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nlsnightmare/nlsnightmare.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nlsnightmare/nlsnightmare.github.io/issues"
+  },
+  "homepage": "https://github.com/nlsnightmare/nlsnightmare.github.io#readme"
+}

@@ -5,7 +5,6 @@ module Jekyll
   module StartsWithFilter
     def starts_with(input, string) #, str_to_replace, replacement)
       input.start_with? string
-      input
     end
   end
 end

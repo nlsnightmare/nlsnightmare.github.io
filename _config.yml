@@ -1,6 +1,2 @@
 permalink: pretty
-collections:
-  posts:
-    output: true
-    permalink: /:collection/:path/:name
 exclude: [package-lock.json, package.json, postcss.config.js, tailwind.config.css, tailwind.config.js]

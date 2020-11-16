@@ -6,9 +6,9 @@
     <div>
         {% for item in site.data.navigation %}
 
-        {%assign show = page.url | starts_with: item.link %}
+        {% assign show = (page.url | starts_with: item.name) %}
 
-        {% if show  %}
+        {% if show == true %}
             {% assign color = 'bg-purple-500' %}
         {% else %} 
             {% assign color = '' %}
@@ -16,7 +16,7 @@
 
 
         <a href="{{ item.link }}" class="text-center {{color}} text-gray-200 hover:bg-purple-400 px-2 py-2 mx-1">
-            {{ item.link | replace_last: "/", "" }}
+            {{ item.name }}
         </a>
         {% endfor %}
     </div>

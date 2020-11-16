@@ -1,0 +1,15 @@
+---
+layout: default
+---
+<h1 class="flex justify-between items-baseline border-b-2 mb-2 border-gray-400">
+    <span class="text-2xl font-bold text-purple-700">{{ page.title }}</span>
+    <span>{{ page.date | date: '%B %d, %Y' }}</span>
+</h1>
+
+<main class="content">
+{{ content }}
+</main>
+
+<button 
+    onclick="location.href = 'https://www.reddit.com/submit?url=' + location.href + '&title={{page.title | url_encode}}'">
+    Share to reddit</button>

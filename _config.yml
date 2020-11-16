@@ -1,0 +1,5 @@
+permalink: pretty
+collections:
+  posts:
+    output: true
+    permalink: /:collection/:path/:name

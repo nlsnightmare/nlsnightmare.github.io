@@ -1,0 +1,43 @@
+---
+permalink: page.permalink
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A programming blog and portfolio">
+    <meta name="keywords" content="programming{% for tag in page.tags %}, {{tag}}{% endfor %}">
+    <meta name="author" content="Nick Maroulakis">
+    <title>{{ page.title }}</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/assets/favicon/site.webmanifest">
+
+
+
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-300 text-gray-900 min-h-screen leading-8">
+    <div class="bg-purple-700 pb-20">{% include navigation.html %}</div>
+
+    <div class="-mt-16 bg-gray-100 md:max-w-screen-md lg:max-w-screen-lg mx-auto p-6 shadow-lg flex-1">
+    {{ content }}
+    </div>
+
+    <footer class="mt-4 px-2 fixed bottom-0 bg-gray-700 text-gray-200 w-full">
+        <div class="md:max-w-screen-md lg:max-w-screen-lg mx-auto text-right">
+        Nick Maroulakis
+        </div>
+    </footer>
+
+<!-- <script src="/assets/js/instantclick.min.js" data-no-instant></script>
+<script data-no-instant>InstantClick.init();</script> -->
+
+<script src="/assets/js/instant-page.min.js" type="module" ></script>
+</body>
+</html>

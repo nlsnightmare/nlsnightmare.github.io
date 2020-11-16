@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#instantclick-bar {
+    @apply bg-purple-400;
+}
+
+body { font-family: 'Nunito'; line-height: 1.7em; }
+code {
+    font-family: 'Roboto Mono'; 
+    @apply block border-l-8 bg-purple-600 border-purple-800 text-white leading-6 p-2 my-2;
+}
+
+.content a { @apply text-purple-700 underline }
+.content a:hover { @apply text-purple-500 }

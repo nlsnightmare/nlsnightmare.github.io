@@ -598,10 +598,6 @@ video {
   border-color: rgba(203, 213, 224, var(--border-opacity));
 }
 
-.border-b-2 {
-  border-bottom-width: 2px;
-}
-
 .block {
   display: block;
 }
@@ -632,10 +628,6 @@ video {
 
 .text-xl {
   font-size: 1.25rem;
-}
-
-.text-2xl {
-  font-size: 1.5rem;
 }
 
 .leading-6 {
@@ -710,6 +702,10 @@ video {
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+.pb-12 {
+  padding-bottom: 3rem;
 }
 
 .pb-20 {
@@ -833,7 +829,23 @@ video {
 body { font-family: 'Nunito'; line-height: 1.7em;
 }
 
+code { font-family: 'Roboto Mono';
+}
+
 code {
+  --bg-opacity: 1;
+  background-color: #edf2f7;
+  background-color: rgba(237, 242, 247, var(--bg-opacity));
+  display: inline-block;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  --text-opacity: 1;
+  color: #44337a;
+  color: rgba(68, 51, 122, var(--text-opacity));
+  font-size: 0.875rem;
+}
+
+pre.highlight code {
   font-family: 'Roboto Mono';
   display: block;
   border-left-width: 8px;
@@ -856,6 +868,12 @@ code {
 }
 
 .content a:hover { --text-opacity: 1; color: #9f7aea; color: rgba(159, 122, 234, var(--text-opacity))
+}
+
+h1 { --text-opacity: 1; color: #6b46c1; color: rgba(107, 70, 193, var(--text-opacity)); font-weight: 700; font-size: 1.5rem
+}
+
+h2 { --text-opacity: 1; color: #6b46c1; color: rgba(107, 70, 193, var(--text-opacity)); font-weight: 700; font-size: 1.125rem; margin-top: 0.5rem
 }
 
 @media (min-width: 768px) {

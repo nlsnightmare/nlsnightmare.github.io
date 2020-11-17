@@ -36,7 +36,8 @@ wrong, but hey, if it works don't fix it, am I right?
 Well, as you can probably see, this blog is quite new. I haven't made
 any posts about my personal projects yet, although you could say this
 is a personal project ;)  
-In any case, you can check out my [github.]({{ site.data.contact.github }})
+In any case, you can check out my
+[github.]({{ site.data.contact.github }}){:target="_blank"}
 The code there isn't the best example of my work, but it should at least
 give you an idea of what kind of projects I like to work on. I also plan
 to soon&trade; begin a series of blog posts on my personal projects. Stay 

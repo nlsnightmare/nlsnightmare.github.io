@@ -7,9 +7,9 @@ title: Blog
 
 <ul>
   {% for post in site.posts %}
-  <li class="mb-3 leading-6">
-    <a href="{{ post.url }}" class="hover:bg-purple-200 block p-2">
-      <h2 class="text-purple-700">
+  <li class="leading-6">
+    <a href="{{ post.url }}" class="hover:bg-purple-200 block p-2 not-link">
+      <h2 class="mt-0">
         {{ post.title }}
       </h2>
       <span>{{ post.excerpt }}</span>

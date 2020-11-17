@@ -9,9 +9,10 @@ title: Blog
   {% for post in site.posts %}
   <li class="leading-6">
     <a href="{{ post.url }}" class="hover:bg-purple-200 block p-2 not-link">
-      <h2 class="mt-0">
-        {{ post.title }}
-      </h2>
+      <div class="flex justify-between items-baseline">
+      <h2 class="mt-0">{{ post.title }}</h2>
+      <span>{{ post.date | date: '%B %d, %Y' }}</span>
+      </div>
       <span>{{ post.excerpt }}</span>
     </a>
   </li>

@@ -619,6 +619,10 @@ video {
   flex-direction: row;
 }
 
+.flex-col {
+  flex-direction: column;
+}
+
 .flex-wrap {
   flex-wrap: wrap;
 }
@@ -981,5 +985,15 @@ h2 a { text-decoration: none !important;
 @media (min-width: 1024px) {
   .lg\:max-w-screen-lg {
     max-width: 1024px;
+  }
+}
+
+@media (min-width: 450px) {
+  .xs\:flex-row {
+    flex-direction: row;
+  }
+
+  .xs\:text-left {
+    text-align: left;
   }
 }

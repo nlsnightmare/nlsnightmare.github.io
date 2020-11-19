@@ -10,7 +10,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "build-site": "NODE_ENV=production tailwindcss build style.css -o assets/css/style.css && JEKYLL_ENV=production jekyll build"
+    "build-site": "NODE_ENV=production tailwindcss build style.css -o assets/css/style.css && JEKYLL_ENV=production jekyll build",
+    "build-css": "tailwindcss build style.css -o assets/css/style.css"
   },
   "repository": {
     "type": "git",

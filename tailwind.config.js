@@ -13,7 +13,11 @@ module.exports = {
     ]
   },
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+      'xs': '450px',
+      }
+    },
   },
   variants: {},
   plugins: [],

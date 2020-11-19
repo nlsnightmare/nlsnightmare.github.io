@@ -1,0 +1,13 @@
+---
+
+layout: default
+---
+<div class="bg-purple-700">{% include navigation.html %}</div>
+
+<div class="bg-purple-600">
+    <div class="responsive py-20 pr-2 text-right">
+        <div class="text-3xl text-gray-100 font-bold">{{ page.hero.title | replace: ':site', site.data.contact.sitename }}</div>
+        <div class="text-lg text-gray-300">{{ page.hero.subtitle }}</div>
+    </div>
+</div>
+<div class="responsive pr-2">{{content}}</div>

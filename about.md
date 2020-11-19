@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: card
 title: about
 ---
 # About me
@@ -8,7 +8,7 @@ title: about
 Well, assuming you didn't visit this page by accident, you're here to 
 learn a bit about me. If you're looking for a tl;dr, [well here you go.](#too-long-didnt-read)
 
-## Beginnings
+## [Beginnings](#beginnings)
 I was born in Athens, in 1996. I always loved playing games, and from
 a very early age I was making `Powerpoint Presentations` which I pretended 
 was games (as a sidenote, if you also did this, I love you).
@@ -22,7 +22,7 @@ I started maniacally searching the internet for tutorials, so I could
 learn more. Well, I was about 12 at the time. Needless to say, programming
 has become both my hobby and my job. I have yet to regret it ;)
 
-## Ok, something more recent?
+## [Ok, something more recent?](#ok-something-more-recent)
 Right now, I'm the lead developer in a Greek tech company. I do mainly 
 `Backend` stuff, but I also dabble in `Frontend`, as well as `DevOps`.
 Our tech stack mainly consists of `Angular` on the frontend, and either
@@ -32,7 +32,7 @@ Our tech stack mainly consists of `Angular` on the frontend, and either
 If you're thinking that's a lot of buzzwords, well you're not really
 wrong, but hey, if it works don't fix it, am I right?
 
-## Talk is cheap, show me code
+## [Talk is cheap, show me code](#talk-is-cheap-show-me-code)
 Well, as you can probably see, this blog is quite new. I haven't made
 any posts about my personal projects yet, although you could say this
 is a personal project ;)  
@@ -43,7 +43,7 @@ give you an idea of what kind of projects I like to work on. I also plan
 to soon&trade; begin a series of blog posts on my personal projects. Stay 
 tuned!
 
-## Too Long; Didn't Read
+## [Too Long; Didn't Read](#too-long-didnt-read)
 A life-long programmer, who started coding at the age of 12. I am currently
 working as a full-stack developer. Uh... yeah, that's all folks! Thanks for
 reading!

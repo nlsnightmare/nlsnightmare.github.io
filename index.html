@@ -1,0 +1,54 @@
+---
+layout: page
+title: home
+hero:
+  title: Welcome to :site!
+  subtitle: If you like rants and programming, you're gonna love it
+---
+
+<div class="grid md:grid-cols-2 gap-4 mt-4">
+<a href="/404" class="card flex flex-row justify-start items-center">
+  <div class="bg-blue-400 text-white icon">{% include icons/code.svg %}</div>
+
+  <div class="pl-4">
+    <h2 class="text-gray-700">View my projects</h2>
+    <span class="text-gray-700">don't judge though</span>
+  </div>
+</a>
+
+{% assign firstPost = site.posts.first %}
+<a href="{{ firstPost.url }}" class="card flex flex-row justify-start items-center">
+    <div class="bg-green-400 text-white icon">
+      {% include icons/document-text.svg %}
+    </div>
+    
+    <div class="pl-4">
+      <h2 class="text-gray-700">{{ firstPost.title}}</h2>
+      <span class="text-gray-700">read my first post ever</span>
+    </div>
+</a>
+<a href="/posts/latest" class="card flex flex-row justify-start items-center">
+    <div class="bg-yellow-400 text-white icon">
+      {% include icons/terminal.svg %}
+    </div>
+
+    <div class="pl-4">
+      <h2 class="text-gray-700">Read some code</h2>
+      <span class="text-gray-700">...of questionable quality</span>
+    </div>
+</a>
+<a href="/rants/latest" class="card flex flex-row justify-start items-center">
+  <div class="flex flex-row justify-start items-center">
+    <div class="bg-red-400 text-white icon">
+      {% include icons/shield-exclamation.svg %}
+    </div>
+
+    <div class="pl-4">
+      <h2 class="text-gray-700">Latest rant</h2>
+      <span class="text-gray-700">because ranting is fun!</span>
+    </div>
+
+  </div>
+
+</a>
+</div>

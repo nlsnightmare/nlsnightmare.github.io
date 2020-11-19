@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Hello, world!
+tags: 
+  - misc
 ---
 This is my first post. Hopefully, it won't be the last.
 Through this blog I hope to archive, as well as share the knowledge

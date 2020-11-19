@@ -1,10 +1,23 @@
 ---
-layout: default
+layout: card
 ---
 <div class="flex justify-between items-baseline">
     <h1>{{ page.title }}</h1>
     <span>{{ page.date | date: '%B %d, %Y' }}</span>
 </div>
+
+
+
+{% assign tagCount = page.tags | size  %}
+{% if tagCount > 0 %}
+    <div class="mb-2">
+        <span>Tags:</span> 
+        {% for tag in page.tags %}
+            {% assign color = site.data.tags[tag].color %}
+            <span class="bg-{{color}}-200 hover:bg-{{color}}-200 text-{{color}}-900 rounded-lg px-3 leading-7 inline-block">{{ tag }}</span>
+        {% endfor %}
+    </div>
+{% endif %}
 <hr class="border-gray-400 mb-2">
 
 <main>{{ content }}</main>

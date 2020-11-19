@@ -526,6 +526,11 @@ video {
   background-color: rgba(209, 213, 219, var(--tw-bg-opacity));
 }
 
+.bg-gray-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgba(156, 163, 175, var(--tw-bg-opacity));
+}
+
 .bg-gray-700 {
   --tw-bg-opacity: 1;
   background-color: rgba(55, 65, 81, var(--tw-bg-opacity));
@@ -638,6 +643,10 @@ video {
   flex: 1 1 0%;
 }
 
+.font-normal {
+  font-weight: 400;
+}
+
 .font-bold {
   font-weight: 700;
 }
@@ -695,8 +704,8 @@ video {
   margin-top: 1rem;
 }
 
-.-mt-28 {
-  margin-top: -7rem;
+.-mt-44 {
+  margin-top: -11rem;
 }
 
 .min-h-screen {
@@ -734,6 +743,11 @@ video {
 .py-20 {
   padding-top: 5rem;
   padding-bottom: 5rem;
+}
+
+.py-28 {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
 }
 
 .pr-2 {

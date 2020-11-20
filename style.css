@@ -9,12 +9,14 @@
 body { font-family: 'Nunito'; line-height: 1.7em; }
 
 code { font-family: 'Roboto Mono'; }
-code {
-    @apply bg-gray-200 inline-block px-2 text-purple-900 text-sm;
-}
+code { @apply bg-gray-200 inline-block px-2 text-purple-900 text-sm; }
 pre.highlight code {
     font-family: 'Roboto Mono'; 
-    @apply block border-l-8 bg-purple-600 border-purple-800 text-white leading-6 p-2 my-2;
+    @apply block border-l-8 bg-purple-900 border-purple-700 text-white leading-6 p-2 my-2;
+}
+
+blockquote {
+    @apply block border-l-8 bg-gray-200 border-purple-700 leading-6 p-2 my-2;
 }
 
 .content a:not(.not-link) { @apply text-purple-700 underline hover:text-purple-500 }

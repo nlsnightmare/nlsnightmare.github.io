@@ -6,11 +6,12 @@
   "dependencies": {
     "autoprefixer": "^10.0.2",
     "postcss": "^8.1.8",
+    "postcss-cli": "^8.3.0",
     "tailwindcss": "^2.0.1"
   },
   "devDependencies": {},
   "scripts": {
-    "build-site": "NODE_ENV=production tailwindcss build style.css -o assets/css/style.css && JEKYLL_ENV=production jekyll build",
+    "build-site": "JEKYLL_ENV=production jekyll build && NODE_ENV=production tailwindcss build style.css -o _site/assets/css/style.css ",
     "build-css": "tailwindcss build style.css -o assets/css/style.css"
   },
   "repository": {

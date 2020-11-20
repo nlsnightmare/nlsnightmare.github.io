@@ -2,3 +2,5 @@ misc:
   color: gray
 javascript:
   color: red
+php:
+  color: fuchsia

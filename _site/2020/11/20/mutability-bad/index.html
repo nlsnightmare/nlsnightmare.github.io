@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A programming blog and portfolio">
+    <meta name="keywords" content="programming, php">
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="nth-line" />
+    <meta property="og:url" content="nlsnightmare.github.io" />
+    <meta property="og:site_name" content="nth-line" />
+    <meta property="og:description" content="A programming blog" />
+    <meta name="author" content="Nick Maroulakis">
+    <title>Getting Burned by Mutabilty</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/assets/favicon/site.webmanifest">
+
+
+
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-300 text-gray-900 min-h-screen leading-8 pb-12">
+    <div class="bg-purple-700"><nav class="flex flex-col flex-wrap justify-between py-3 responsive xs:flex-row text-xl">
+    <a href="/" class="flex-1 font-bold xs:text-left xs:items-baseline text-2xl text-center text-white">
+        nth-line
+    </a>
+
+    <div class="flex flex-col xs:flex-row">
+        
+
+        
+
+        
+
+
+        <a href="/" class="text-center  text-gray-200 hover:bg-purple-400 px-2 py-2 ml-2">
+            /index
+        </a>
+        
+
+        
+
+        
+
+
+        <a href="/about/" class="text-center  text-gray-200 hover:bg-purple-400 px-2 py-2 ml-2">
+            /about
+        </a>
+        
+
+        
+
+        
+
+
+        <a href="/posts/" class="text-center  text-gray-200 hover:bg-purple-400 px-2 py-2 ml-2">
+            /posts
+        </a>
+        
+    </div>
+</nav></div>
+<div class="bg-purple-600">
+    <div class="responsive py-28 pr-2 text-right">
+        <div class="text-3xl text-gray-100 font-bold"></div>
+        <div class="text-lg text-gray-300"></div>
+    </div>
+</div>
+
+<main class="content -mt-44 bg-gray-100 responsive p-6 shadow-lg flex-1">
+    <div class="flex flex-col items-baseline justify-between sm:flex-row">
+    <h1>Getting Burned by Mutabilty</h1>
+    <span>November 20, 2020</span>
+</div>
+
+
+
+
+
+    <div class="mb-2">
+        <span>Tags:</span> 
+        
+            
+            <span class="bg-fuchsia-200 hover:bg-fuchsia-200 text-fuchsia-900 rounded-lg px-3 leading-7 inline-block">php</span>
+        
+    </div>
+
+
+
+
+<span class="text-sm">
+    Estimated reading time: 
+
+    
+        ~2min
+    
+</span>
+
+<hr class="border-gray-400 mb-2">
+
+
+<main><p>Now, I know what you’re thinking. Really, Nick? We all know that. Immutability is the way to go!
+Well, yeah, but why? Without a real life example, the statement <code class="language-plaintext highlighter-rouge">everything must me immutable</code> can
+be a tough pill to swallow.</p>
+
+<!-- excerpt -->
+
+<h2 id="the-hidden-bug"><a href="#the-hidden-bug">The hidden bug</a></h2>
+<p>Today I was making a simple subscription api, when I noticed a very strange bug. The clients’ subscriptions
+never expired! Thankfully, this api hadn’t launched yet, and the tests caught the bug anyways, but after
+taking a look at the code, I was a bit confused. The <code class="language-plaintext highlighter-rouge">Subscription</code> class looked a bit like this:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Subscription</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="kt">Carbon</span> <span class="nv">$start</span><span class="p">;</span>
+    <span class="k">private</span> <span class="kt">CarbonInterval</span> <span class="nv">$duration</span><span class="p">;</span>
+
+    <span class="c1">// Constructor, setters etc. ommited</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getEnd</span><span class="p">():</span> <span class="kt">bool</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">start</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">duration</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">hasExpired</span><span class="p">():</span> <span class="kt">bool</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nf">now</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">gt</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">getEnd</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Nothing too crazy, right? Even if you’ve never written a single line of <code class="language-plaintext highlighter-rouge">php</code> in your life,
+it should be pretty easy to understand. Now here’s the failing test:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$subscription</span> <span class="o">=</span> <span class="nf">loadSubscriptionForClient</span><span class="p">(</span><span class="nv">$someClient</span><span class="p">);</span>
+
+<span class="c1">// We 'time-travel' to one day after the subscription has ended</span>
+<span class="nc">Carbon</span><span class="o">::</span><span class="nf">setTestNow</span><span class="p">(</span><span class="nv">$subscription</span><span class="o">-&gt;</span><span class="nf">getEnd</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">addDay</span><span class="p">())</span>
+
+<span class="c1">// Now the subscription must be expired, right? WRONG!</span>
+<span class="nf">assertTrue</span><span class="p">(</span><span class="nv">$subscription</span><span class="o">-&gt;</span><span class="nf">hasExpired</span><span class="p">());</span>
+</code></pre></div></div>
+
+<p>Ok, what went wrong? Well, the title kinda gives it away, doesn’t it? Theres a mutation going on!
+…but there are no assigments. And that’s the worst kind of mutation. The hidden mutation! <em>(pause for dramatic effect)</em>.</p>
+
+<h2 id="the-hidden-mutation"><a href="#the-hidden-mutation">The hidden mutation</a></h2>
+<p>By now you’ve probably guessed it, but the hidden mutation is inside our <code class="language-plaintext highlighter-rouge">getEnd</code> function. So innocent looking,
+yet so naughty. That’s fine, I guess we should have read the documentation, right? It clearly states that:</p>
+<blockquote>
+  <p>when you use a modifier on a Carbon instance, it modifies and returns the same instance</p>
+</blockquote>
+
+<p>Great, just read the docs and remember when any function mutates the instance object, instead of creating a new one.
+Doesn’t sound that hard, right? ;) Oh, btw there are 2 mutations going on in the code. Wanna check what the second
+one is?</p>
+
+<h2 id="the-hidden-mutation-2-electric-boogaloo"><a href="#the-hidden-mutation-2-electric-boogaloo">The hidden mutation 2: Electric Boogaloo</a></h2>
+<p>Hopefully, after all this reading, it’s easy to spot. When we call <code class="language-plaintext highlighter-rouge">getEnd()-&gt;addDay()</code>, it adds one day to the
+<em>start</em> property of our object! That can’t be good. At least the fix is simple enough.</p>
+
+<h2 id="the-fix"><a href="#the-fix">The fix</a></h2>
+<p>Did you know that <code class="language-plaintext highlighter-rouge">php</code> has a <code class="language-plaintext highlighter-rouge">clone</code> keyword? Me neither, untill a few months ago. I’m not sure whether springling
+our code with random <code class="language-plaintext highlighter-rouge">clone</code>s is a great idea though. Thankfully, <code class="language-plaintext highlighter-rouge">Carbon</code> has a nice <code class="language-plaintext highlighter-rouge">clone()</code> method, which solves the
+problem… for now. However, in a situation like this, using actually immutable objects would have prevented the problem.
+It looks like the <code class="language-plaintext highlighter-rouge">Carbon</code> team is one step ahead of me, since they also provide a <code class="language-plaintext highlighter-rouge">CarbonImmutable</code> class. If you value your sanity, and if you like <strong>not</strong> spending your time debugging problems like this, try to use it. Hopefully one day 
+<code class="language-plaintext highlighter-rouge">Carbon</code> will be immutable by default.</p>
+</main>
+
+<!-- <button 
+    class="flex bg-fu"
+    onclick="location.href = 'https://www.reddit.com/submit?url=' + location.href + '&title=Getting+Burned+by+Mutabilty'">
+    Share to reddit
+    <div class="icon">
+
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
+</svg>
+
+    </div>
+</button> -->
+</main>
+
+    <footer class="mt-4 px-2 fixed bottom-0 bg-gray-700 text-gray-200 w-full">
+        <div class="responsive px-2 mx-auto text-right">Nick Maroulakis</div>
+    </footer>
+
+    <script src="/assets/js/instant-page.min.js" type="module" ></script>
+</body>
+</html>

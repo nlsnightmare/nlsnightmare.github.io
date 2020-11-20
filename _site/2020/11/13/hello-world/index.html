@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A programming blog and portfolio">
-    <meta name="keywords" content="programming, misc">
+    <meta name="keywords" content="programming, misc, unknown">
     <meta property="og:type" content="website" />
     <meta property="og:title" content="nth-line" />
     <meta property="og:url" content="nlsnightmare.github.io" />
@@ -22,20 +22,20 @@
 
     <link rel="stylesheet" href="/assets/css/style.css" />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
 </head>
 <body class="bg-gray-300 text-gray-900 min-h-screen leading-8 pb-12">
     <div class="bg-purple-700"><nav class="flex flex-col flex-wrap justify-between py-3 responsive xs:flex-row text-xl">
-    <div class="flex-1 font-bold xs:text-left text-2xl text-center text-white">
-        <a href="/">nth-line</a>
-    </div>
+    <a href="/" class="flex-1 font-bold xs:text-left xs:items-baseline text-2xl text-center text-white">
+        nth-line
+    </a>
 
     <div class="flex flex-col xs:flex-row">
         
 
         
 
-         
+        
 
 
         <a href="/" class="text-center  text-gray-200 hover:bg-purple-400 px-2 py-2 ml-2">
@@ -45,7 +45,7 @@
 
         
 
-         
+        
 
 
         <a href="/about/" class="text-center  text-gray-200 hover:bg-purple-400 px-2 py-2 ml-2">
@@ -55,7 +55,7 @@
 
         
 
-         
+        
 
 
         <a href="/posts/" class="text-center  text-gray-200 hover:bg-purple-400 px-2 py-2 ml-2">
@@ -72,7 +72,7 @@
 </div>
 
 <main class="content -mt-44 bg-gray-100 responsive p-6 shadow-lg flex-1">
-    <div class="flex justify-between items-baseline">
+    <div class="flex flex-col items-baseline justify-between sm:flex-row">
     <h1>Hello, world!</h1>
     <span>November 13, 2020</span>
 </div>
@@ -87,9 +87,24 @@
             
             <span class="bg-gray-200 hover:bg-gray-200 text-gray-900 rounded-lg px-3 leading-7 inline-block">misc</span>
         
+            
+            <span class="bg--200 hover:bg--200 text--900 rounded-lg px-3 leading-7 inline-block">unknown</span>
+        
     </div>
 
+
+
+
+<span class="text-sm">
+    Estimated reading time: 
+
+    
+        &lt;1min
+    
+</span>
+
 <hr class="border-gray-400 mb-2">
+
 
 <main><p>This is my first post. Hopefully, it won’t be the last.
 Through this blog I hope to archive, as well as share the knowledge
@@ -98,20 +113,24 @@ I’ve accumulated over the years. It will be a fun little experiment :)</p>
 <p>This site is still kinda barren, but in the meantime you can check my <a href="/about">about page</a></p>
 </main>
 
-<button 
+<!-- <button 
+    class="flex bg-fu"
     onclick="location.href = 'https://www.reddit.com/submit?url=' + location.href + '&title=Hello%2C+world%21'">
-    Share to reddit</button>
+    Share to reddit
+    <div class="icon">
+
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
+</svg>
+
+    </div>
+</button> -->
 </main>
 
     <footer class="mt-4 px-2 fixed bottom-0 bg-gray-700 text-gray-200 w-full">
-        <div class="md:max-w-screen-md lg:max-w-screen-lg mx-auto text-right">
-        Nick Maroulakis
-        </div>
+        <div class="responsive px-2 mx-auto text-right">Nick Maroulakis</div>
     </footer>
 
-<!-- <script src="/assets/js/instantclick.min.js" data-no-instant></script>
-<script data-no-instant>InstantClick.init();</script> -->
-
-<script src="/assets/js/instant-page.min.js" type="module" ></script>
+    <script src="/assets/js/instant-page.min.js" type="module" ></script>
 </body>
 </html>

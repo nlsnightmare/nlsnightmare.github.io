@@ -885,6 +885,7 @@ pre.highlight code {
   line-height: 1.5rem;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+  overflow-x: scroll;
   padding: 0.5rem;
   --tw-text-opacity: 1;
   color: rgba(255, 255, 255, var(--tw-text-opacity));

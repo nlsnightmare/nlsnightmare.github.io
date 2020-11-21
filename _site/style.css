@@ -12,7 +12,7 @@ code { font-family: 'Roboto Mono'; }
 code { @apply bg-gray-200 inline-block px-2 text-purple-900 text-sm; }
 pre.highlight code {
     font-family: 'Roboto Mono'; 
-    @apply block border-l-8 bg-purple-900 border-purple-700 text-white leading-6 p-2 my-2;
+    @apply block border-l-8 bg-purple-900 border-purple-700 text-white leading-6 p-2 my-2 overflow-x-scroll;
 }
 
 blockquote {

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A programming blog and portfolio">
+    <meta name="keywords" content="programming, php, javascript">
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="nth-line" />
+    <meta property="og:url" content="nlsnightmare.github.io" />
+    <meta property="og:site_name" content="nth-line" />
+    <meta property="og:description" content="A programming blog" />
+    <meta name="author" content="Nick Maroulakis">
+    <title>PUT, file upload and Laravel</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/assets/favicon/site.webmanifest">
+
+
+
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-300 text-gray-900 min-h-screen leading-8 pb-12">
+    <div class="bg-purple-700"><nav class="flex flex-col flex-wrap justify-between py-3 responsive xs:flex-row text-xl">
+    <a href="/" class="flex-1 font-bold xs:text-left xs:items-baseline text-2xl text-center text-white">
+        nth-line
+    </a>
+
+    <div class="flex flex-col xs:flex-row">
+        
+
+        
+
+        
+
+
+        <a href="/" class="text-center  text-gray-200 hover:bg-purple-400 px-2 py-2 ml-2">
+            /index
+        </a>
+        
+
+        
+
+        
+
+
+        <a href="/about/" class="text-center  text-gray-200 hover:bg-purple-400 px-2 py-2 ml-2">
+            /about
+        </a>
+        
+
+        
+
+        
+
+
+        <a href="/posts/" class="text-center  text-gray-200 hover:bg-purple-400 px-2 py-2 ml-2">
+            /posts
+        </a>
+        
+    </div>
+</nav></div>
+<div class="bg-purple-600">
+    <div class="responsive py-28 pr-2 text-right">
+        <div class="text-3xl text-gray-100 font-bold"></div>
+        <div class="text-lg text-gray-300"></div>
+    </div>
+</div>
+
+<main class="content -mt-44 bg-gray-100 responsive p-6 shadow-lg flex-1">
+    <div class="flex flex-col items-baseline justify-between sm:flex-row">
+    <h1>PUT, file upload and Laravel</h1>
+    <span>January 16, 2021</span>
+</div>
+
+
+
+
+
+    <div class="mb-2">
+        <span>Tags:</span> 
+        
+            
+            <span class="bg-fuchsia-200 hover:bg-fuchsia-200 text-fuchsia-900 rounded-lg px-3 leading-7 inline-block">php</span>
+        
+            
+            <span class="bg-red-200 hover:bg-red-200 text-red-900 rounded-lg px-3 leading-7 inline-block">javascript</span>
+        
+    </div>
+
+
+
+
+<span class="text-sm">
+    Estimated reading time: 
+
+    
+        ~3min
+    
+</span>
+
+<hr class="border-gray-400 mb-2">
+
+
+<main><p>Hello! It’s been a while. A quick post to start the year. See, a while back
+we had a very weird bug: a <code class="language-plaintext highlighter-rouge">PUT</code> request would show up as empty in the backend,
+and trigger a validation error. This was particularly weird, because we used the
+exact same code, both backend and frontend, for another endpoint, and it worked fine.</p>
+
+<!-- exerpt -->
+
+<h2 id="some-backstory"><a href="#some-backstory">Some Backstory</a></h2>
+<p>So, we have two endpoints. They accept the exact same request. [<a href="#appendix-1">1</a>]
+Let’s call them <code class="language-plaintext highlighter-rouge">Endpoint A</code>, and <code class="language-plaintext highlighter-rouge">Endpoint B</code>.<br />
+The only functional difference, is that <code class="language-plaintext highlighter-rouge">Endpoint A</code> accepts the <code class="language-plaintext highlighter-rouge">POST</code> request method, whereas <code class="language-plaintext highlighter-rouge">Endpoint B</code> accepts <code class="language-plaintext highlighter-rouge">PUT</code>.
+Our frontend code looks like this:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">SomeService</span> <span class="p">{</span>
+    <span class="c1">// constructors etc. emmited</span>
+
+    <span class="nx">postThing</span><span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="nx">Thing</span><span class="p">):</span> <span class="nx">Observable</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">"</span><span class="s2">/api/endpoint-a/</span><span class="dl">"</span><span class="p">,</span> <span class="nx">data</span><span class="p">.</span><span class="nx">asFormData</span><span class="p">())</span>
+    <span class="p">}</span>
+
+    <span class="nx">putThing</span><span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="nx">Thing</span><span class="p">):</span> <span class="nx">Observable</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="dl">"</span><span class="s2">/api/endpoint-b/</span><span class="dl">"</span><span class="p">,</span> <span class="nx">data</span><span class="p">.</span><span class="nx">asFormData</span><span class="p">())</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>Alright, so the code is really identical. There is no reason to believe that the result should be different.
+But it is! Debugging things like this is very annoying, because it seems that it <strong>must</strong> work, yet it doesn’t.</p>
+
+<h2 id="digging-deeper"><a href="#digging-deeper">Digging Deeper</a></h2>
+<p>Hey, wait a minute… what does this <code class="language-plaintext highlighter-rouge">asFormData</code> method do? Let’s take a look</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Thing</span> <span class="p">{</span>
+    <span class="nx">asFormData</span><span class="p">():</span> <span class="nx">FormData</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FormData</span><span class="p">()</span>
+
+        <span class="nx">data</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">'</span><span class="s1">some-key</span><span class="dl">'</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">someKey</span><span class="p">)</span>
+        <span class="nx">data</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">'</span><span class="s1">some-other-key</span><span class="dl">'</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">someOtherKey</span><span class="p">)</span>
+
+        <span class="c1">// ... more appending to form data</span>
+
+        <span class="k">return</span> <span class="nx">data</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>Ah, alright, it just created a <code class="language-plaintext highlighter-rouge">FormData</code> representation of the object. Is that necessary though?
+Well yes! See, this <code class="language-plaintext highlighter-rouge">Thing</code> also contains files, specifically images. Since we want to upload the images
+to our server, the most sensible thing to do is to convert it to <code class="language-plaintext highlighter-rouge">FormData</code>, since uploading files
+using json is… inadvisable [<a href="#appendix-2">2</a>]</p>
+
+<h2 id="the-first-clue"><a href="#the-first-clue">The First Clue</a></h2>
+<p>Now, since the endpoint doesn’t really work, it’s best to simplify it a little bit, and try to work out the details.
+The only thing we can reasonably change id the whole <code class="language-plaintext highlighter-rouge">FormData</code> thing, so let’s do that. We’re sending simple json data now.</p>
+
+<p>Oh hey, it works! Well, we can’t send images anymore, but at least our request doesn’t show up as empty. So why did 
+<code class="language-plaintext highlighter-rouge">FormData</code> break it? Let’s see if our friend, <a href="https://stackoverflow.com" target="_blank">stackoverflow.com</a>, has something to say.</p>
+
+<h2 id="the-solution"><a href="#the-solution">The Solution</a></h2>
+<p>After a bit of googling [<a href="#appendix-3">3</a>], this thread pops up: <a href="https://
+stackoverflow.com/a/65009135" target="_blank">https://stackoverflow.com/a/65009135</a>. Aha! Turns out the problem wasn’t with my beloved Laravel after all. It’s 
+just php being php. PHP cannot process files in PUT requests… so does this mean that we can’t upload our file?</p>
+
+<p>Fear not, dear reader! For the great minds that built Laravel have this solved long, long ago. See, when you use
+<code class="language-plaintext highlighter-rouge">blade templates</code> as your frontend, you usually do something like this:</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"our-url"</span> <span class="na">method=</span><span class="s">"POST"</span> <span class="nt">&gt;</span>
+    @method('PUT')
+
+    <span class="c">&lt;!-- inputs etc. --&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre></div></div>
+<p>Right, since the http spec doesn’t officialy support PUT requests, we fake them using the <code class="language-plaintext highlighter-rouge">@method('PUT')</code> directive.
+All it does is inject this teeny-tiny bit of html to our form:</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">name=</span><span class="s">"_method"</span> <span class="na">value=</span><span class="s">"PUT"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+<p>And internally laravel interprets POST requests which have the <code class="language-plaintext highlighter-rouge">_method</code> field set to <code class="language-plaintext highlighter-rouge">PUT</code> as <code class="language-plaintext highlighter-rouge">PUT</code> requests.
+My god, does this mean that we can do this too? YES! In the end, the fix was this simple:</p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">putThing</span><span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="nx">Thing</span><span class="p">):</span> <span class="nx">Observable</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">formData</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">asFormData</span><span class="p">()</span>
+    <span class="nx">data</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">'</span><span class="s1">_method</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">PUT</span><span class="dl">'</span><span class="p">)</span> <span class="c1">// ADD THIS LINE!</span>
+
+    <span class="c1">// ok, we also want to make this a post request</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">"</span><span class="s2">/api/endpoint-b/</span><span class="dl">"</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>And it works! Another debugging session comes to it’s end. If your team isn’t familiar with the intricacies
+of php, I’d <em>strongly suggest</em> you add a comment explaining the whole situation. Hey, you could even link this post,
+right? ;)</p>
+
+<h2 id="appendix"><a href="#appendix">Appendix</a></h2>
+<ol>
+  <li>It may sound dump, but it’s pretty common. Happens all the time when you have to be able to both create, as well as
+update a given resource.</li>
+  <li>You techinally can, by endoding the image/whatever to <code class="language-plaintext highlighter-rouge">base64</code>, but you’d increase the payload size by roughly 33%.
+This is definitely not worth it.</li>
+  <li>Because who the hell direcly searches on stackoverflow anyways?</li>
+</ol>
+
+</main>
+
+<!-- <button 
+    class="flex bg-fu"
+    onclick="location.href = 'https://www.reddit.com/submit?url=' + location.href + '&title=PUT%2C+file+upload+and+Laravel'">
+    Share to reddit
+    <div class="icon">
+
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
+</svg>
+
+    </div>
+</button> -->
+</main>
+
+    <footer class="mt-4 px-2 fixed bottom-0 bg-gray-700 text-gray-200 w-full">
+        <div class="responsive px-2 mx-auto text-right">Nick Maroulakis</div>
+    </footer>
+
+    <script src="/assets/js/instant-page.min.js" type="module" ></script>
+</body>
+</html>

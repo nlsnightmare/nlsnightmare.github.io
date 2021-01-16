@@ -1,9 +1,9 @@
 ---
 layout: page
-title: home
+title: Home
 hero:
-  title: Welcome to :site!
-  subtitle: If you like rants and programming, you're gonna love it
+title: Welcome to :site!
+subtitle: If you like rants and programming, you're gonna love it
 ---
 <div class="grid md:grid-cols-2 gap-4 mt-4">
   <a href="/404" class="card flex flex-row justify-start items-center">
@@ -26,7 +26,8 @@ hero:
     </div>
   </a>
 
-  <a href="{{site.data.contact.github}}/nlsnightmare.github.io" target="_blank" rel="noopener" class="card flex flex-row justify-start items-center">
+  <a href="{{site.data.contact.github}}/nlsnightmare.github.io" target="_blank" rel="noopener"
+    class="card flex flex-row justify-start items-center">
     <div class="bg-green-400 text-white icon">
       {% include icons/code.svg %}
     </div>
@@ -53,19 +54,19 @@ hero:
 </div>
 
 {% assign post = site.posts.first %}
-  <a href="{{ post.url }}" class="mt-4 card flex flex-row justify-start items-center">
-    <div class="flex flex-row justify-start">
-      <div class="bg-gray-400 text-white icon">
-        {% include icons/link.svg %}
-      </div>
-
-      <div class="flex-1 pl-4">
-        <h2 class="text-gray-700">
-          <span class="font-normal">Latest Post:</span>
-          {{ post.title }}
-        </h2>
-        <span class="text-gray-700">{{ post.excerpt }}</span>
-      </div>
+<a href="{{ post.url }}" class="mt-4 card flex flex-row justify-start items-center">
+  <div class="flex flex-row justify-start">
+    <div class="bg-gray-400 text-white icon">
+      {% include icons/link.svg %}
     </div>
 
-  </a>
+    <div class="flex-1 pl-4">
+      <h2 class="text-gray-700">
+        <span class="font-normal">Latest Post:</span>
+        {{ post.title }}
+      </h2>
+      <span class="text-gray-700">{{ post.excerpt }}</span>
+    </div>
+  </div>
+
+</a>

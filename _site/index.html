@@ -11,7 +11,7 @@
     <meta property="og:site_name" content="nth-line" />
     <meta property="og:description" content="A programming blog" />
     <meta name="author" content="Nick Maroulakis">
-    <title>home</title>
+    <title>Welcome to :site!</title>
 
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
@@ -67,8 +67,8 @@
 
 <div class="bg-purple-600">
     <div class="responsive py-20 pr-2 text-right">
-        <div class="text-3xl text-gray-100 font-bold">Welcome to nth-line!</div>
-        <div class="text-lg text-gray-300">If you like rants and programming, you're gonna love it</div>
+        <div class="text-3xl text-gray-100 font-bold"></div>
+        <div class="text-lg text-gray-300"></div>
     </div>
 </div>
 <div class="responsive pr-2"><div class="grid md:grid-cols-2 gap-4 mt-4">
@@ -98,7 +98,8 @@
     </div>
   </a>
 
-  <a href="https://github.com/nlsnightmare/nlsnightmare.github.io" target="_blank" rel="noopener" class="card flex flex-row justify-start items-center">
+  <a href="https://github.com/nlsnightmare/nlsnightmare.github.io" target="_blank" rel="noopener"
+    class="card flex flex-row justify-start items-center">
     <div class="bg-green-400 text-white icon">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
@@ -131,28 +132,29 @@
 </div>
 
 
-  <a href="/2020/11/20/mutability-bad/" class="mt-4 card flex flex-row justify-start items-center">
-    <div class="flex flex-row justify-start">
-      <div class="bg-gray-400 text-white icon">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+<a href="/2021/01/16/put-files-and-laravel/" class="mt-4 card flex flex-row justify-start items-center">
+  <div class="flex flex-row justify-start">
+    <div class="bg-gray-400 text-white icon">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
 </svg>
 
-      </div>
-
-      <div class="flex-1 pl-4">
-        <h2 class="text-gray-700">
-          <span class="font-normal">Latest Post:</span>
-          Getting Burned by Mutabilty
-        </h2>
-        <span class="text-gray-700"><p>Now, I know what you’re thinking. Really, Nick? We all know that. Immutability is the way to go!
-Well, yeah, but why? Without a real life example, the statement <code class="language-plaintext highlighter-rouge">everything must me immutable</code> can
-be a tough pill to swallow.</p>
-</span>
-      </div>
     </div>
 
-  </a></div>
+    <div class="flex-1 pl-4">
+      <h2 class="text-gray-700">
+        <span class="font-normal">Latest Post:</span>
+        PUT, file upload and Laravel
+      </h2>
+      <span class="text-gray-700"><p>Hello! It’s been a while. A quick post to start the year. See, a while back
+we had a very weird bug: a <code class="language-plaintext highlighter-rouge">PUT</code> request would show up as empty in the backend,
+and trigger a validation error. This was particularly weird, because we used the
+exact same code, both backend and frontend, for another endpoint, and it worked fine.</p>
+</span>
+    </div>
+  </div>
+
+</a></div>
 
     <footer class="mt-4 px-2 fixed bottom-0 bg-gray-700 text-gray-200 w-full">
         <div class="responsive px-2 mx-auto text-right">Nick Maroulakis</div>
